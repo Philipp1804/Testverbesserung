@@ -10,4 +10,8 @@
 </div>
 
 <input type="checkbox" [checked] = "joker"> Jocker
-<button class="btn btn-primary" type="submit" [disabled]="!full()" >Absenden</button>
+<button class="btn btn-primary" type="submit" [disabled]="!full()" (click)="sentResult()">Absenden</button>
+
+<div *ngIf="result">
+  Receipt: {{ result.receiptNumber }}
+</div>
