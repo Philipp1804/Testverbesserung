@@ -1,0 +1,13 @@
+<ul>
+  <li><a routerLink="/get-result">Ziehungergebniss</a></li>
+  <li><a routerLink="/place-tip">Tipp kaufen</a></li>
+</ul>
+
+
+
+<div class="flex-container">
+  <button *ngFor="let i of field" (click)="setTip(i)">{{i}}</button>
+</div>
+
+<input type="checkbox" [checked] = "joker"> Jocker
+<button class="btn btn-primary" type="submit" [disabled]="!full()" >Absenden</button>
