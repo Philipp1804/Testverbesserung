@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable} from 'rxjs';
 
-interface reuslt{
+interface IResult{
   receiptTimestamp: string;
   receiptNumber: string;
 }
@@ -16,9 +16,9 @@ export class PlaceTripComponent implements OnInit {
   public field: number[] = new Array(45);
   public joker: boolean;
   public tip: number[] = new Array(6);
-  private resuts: Observable<reuslt>;
+  private result: IResult;
   
-  constructor() { 
+  constructor(private httpClient: HttpClient) { 
     for(var i = 0; i<this.field.length; i++){
       this.field[i] = i+1;
     }
@@ -45,8 +45,10 @@ export class PlaceTripComponent implements OnInit {
   ngOnInit() {
   }
 
-  sentResult(httpClient: HttpClient){
-    this.resuts = httpClient.post(url: "http://lotto.westeurope.azurecontainer.io/api/tip", body: any | this.tip this.joker);
+  sentResult(){
+    const body = { numbers: this.tip, joker: this.joker };
+    this.httpClient.post<IResult>("http://lotto.westeurope.azurecontainer.io/api/tip", body)
+      .subscribe(result => this.result = result);
 
   }
 
